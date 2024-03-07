@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Form to log</h1>
+<form action="/logService">
+    <label for="msg">Mensaje:</label><br>
+    <input type="text" id="msg" name="msg" value="Mensaje"><br><br>
+    <input type="button" value="Submit" onclick="loadLog()">
+</form>
+<div id="getmsg"></div>
+
+
+<script>
+    function loadLog() {
+        let msgVar = document.getElementById("msg").value;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("getmsg").innerHTML =
+                this.responseText;
+        }
+        xhttp.open("GET", "/logService");
+        xhttp.send();
+    }
+</script>
+
+</body>
+</html>
