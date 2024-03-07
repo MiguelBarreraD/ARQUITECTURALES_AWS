@@ -6,8 +6,9 @@ import static spark.Spark.*;
  */
 public class Weblogroundrobin {
     public static void main( String[] args ){
+        staticFiles.location("/public");
         port(4567);
-        get("/log", (req,res) -> "{\"msg\":\"primer mensaje, 24-02-2024 16:45:45\"}");
+        get("/log", (req,res) -> RRInvoke.invoke());
 
     }
 }

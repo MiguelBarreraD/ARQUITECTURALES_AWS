@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Form to log</h1>
-<form action="/logService">
+<form action="/log">
     <label for="msg">Mensaje:</label><br>
     <input type="text" id="msg" name="msg" value="Mensaje"><br><br>
     <input type="button" value="Submit" onclick="loadLog()">
@@ -22,7 +22,7 @@
             document.getElementById("getmsg").innerHTML =
                 this.responseText;
         }
-        xhttp.open("GET", "/logService");
+        xhttp.open("GET", "/log");
         xhttp.send();
     }
 </script>
