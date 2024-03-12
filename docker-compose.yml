@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+
+    logservice1:
+        build:
+            context: .
+            dockerfile: LogServiceFile
+        container_name: logservice1
+        ports:
+            - "35001:6000"
+
+    logservice2:
+        build:
+            context: .
+            dockerfile: LogServiceFile
+        container_name: logservice2
+        ports:
+            - "35002:6000"
+
+    logservice3:
+        build:
+            context: .
+            dockerfile: LogServiceFile
+        container_name: logservice3
+        ports:
+            - "35003:6000"
+
+    mongodatabase:
+        image: mongo:5.0.25-focal
+        container_name: logsdb
+        volumes:
+            - mongodb:/data/db
+            - mongodb_config:/data/configdb
+        ports:
+            - "27017:27017"
+        command: mongod
+
+volumes:
+    mongodb:
+    mongodb_config:

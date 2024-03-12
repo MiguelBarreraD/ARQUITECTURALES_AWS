@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
-<h1>Form to log</h1>
-<form action="/log">
-    <label for="msg">Mensaje:</label><br>
-    <input type="text" id="msg" name="msg" value="Mensaje"><br><br>
-    <input type="button" value="Submit" onclick="loadLog()">
-</form>
-<div id="getmsg"></div>
+    <h1>Form to log</h1>
+    <form action="/log">
+        <label for="msg">Mensaje:</label><br>
+        <input type="text" id="msg" name="msg" value="Mensaje"><br><br>
+        <input type="button" value="Submit" onclick="loadLog()">
+    </form>
+    <div id="getmsg"></div>
 
 
-<script>
-    function loadLog() {
-        let msgVar = document.getElementById("msg").value;
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-            document.getElementById("getmsg").innerHTML =
-                this.responseText;
+    <script>
+        function loadLog() {
+            let msgVar = document.getElementById("msg").value;
+            // Encode the message before appending to the URL
+            let encodedMsg = encodeURIComponent(msgVar);
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                document.getElementById("getmsg").innerHTML =
+                    this.responseText;
+            }
+            // Use the encoded message in the URL
+            xhttp.open("GET", "/log/" + encodedMsg);
+            xhttp.send();
         }
-        xhttp.open("GET", "/log");
-        xhttp.send();
-    }
-</script>
+    </script>
 
 </body>
+
 </html>
