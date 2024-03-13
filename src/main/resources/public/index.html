@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        /* Aquí va el CSS que te proporcioné */
+    </style>
 </head>
 
 <body>
@@ -15,7 +18,6 @@
     </form>
     <div id="getmsg"></div>
 
-
     <script>
         function loadLog() {
             let msgVar = document.getElementById("msg").value;
@@ -24,15 +26,94 @@
 
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function () {
-                document.getElementById("getmsg").innerHTML =
-                    this.responseText;
+                let logs = JSON.parse(this.responseText);
+                let table = "<table><tr><th>Log</th><th>Date</th></tr>";
+                logs.forEach(function (log) {
+                    let dateObj = new Date(log.date.$date);
+                    let formattedDate = dateObj.toLocaleString(); 
+                    table += "<tr><td>" + log.log + "</td><td>" + formattedDate + "</td></tr>";
+                });
+                table += "</table>";
+                document.getElementById("getmsg").innerHTML = table;
             }
-            // Use the encoded message in the URL
             xhttp.open("GET", "/log/" + encodedMsg);
             xhttp.send();
         }
-    </script>
 
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+
+        #getmsg {
+            width: 80%;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
 </body>
 
 </html>

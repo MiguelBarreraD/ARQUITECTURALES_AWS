@@ -2,29 +2,50 @@ version: "3.8"
 
 services:
 
+    lbroundrobbin:
+        build:
+            context: .
+            dockerfile: LogWebFile
+        container_name: LogWebFileRR
+        environment:
+            - PORT=45000
+        ports:
+            - "8080:45000"
+        depends_on:
+            - mongodatabase
+            - logservice1
+            - logservice2
+            - logservice3
+
     logservice1:
         build:
             context: .
             dockerfile: LogServiceFile
         container_name: logservice1
+        environment:
+            - PORT=35001
         ports:
-            - "35001:6000"
+            - "35001:35001"
 
     logservice2:
         build:
             context: .
             dockerfile: LogServiceFile
         container_name: logservice2
+        environment:
+            - PORT=35002
         ports:
-            - "35002:6000"
+            - "35002:35002"
 
     logservice3:
         build:
             context: .
             dockerfile: LogServiceFile
         container_name: logservice3
+        environment:
+            - PORT=35003
         ports:
-            - "35003:6000"
+            - "35003:35003"
 
     mongodatabase:
         image: mongo:5.0.25-focal

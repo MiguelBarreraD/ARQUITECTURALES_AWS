@@ -10,9 +10,9 @@ import java.nio.charset.StandardCharsets;
 
 public class RRInvoke {
     private static final String USER_AGENT = "Mozilla/5.0";
-    private static final String URL_1 = "http://localhost:35001/logservice?message=";
-    private static final String URL_2 = "http://localhost:35002/logservice?message=";
-    private static final String URL_3 = "http://localhost:35003/logservice?message=";
+    private static final String URL_1 = "http://logservice1:35001/logservice?message=";
+    private static final String URL_2 = "http://logservice2:35002/logservice?message=";
+    private static final String URL_3 = "http://logservice3:35003/logservice?message=";
     private static int counter = 1;
 
     public synchronized static String invoke(String message) throws IOException {
@@ -21,15 +21,12 @@ public class RRInvoke {
         switch (counter) {
             case 1:
                 url = URL_1;
-                System.out.println("LA URL UTILIZADA FUE LA PRIMERA");
                 break;
             case 2:
                 url = URL_2;
-                System.out.println("LA URL UTILIZADA FUE LA SEGUNDA");
                 break;
             case 3:
                 url = URL_3;
-                System.out.println("LA URL UTILIZADA FUE LA TERCERA");
                 break;
             default:
                 url = URL_1;
